@@ -18,12 +18,13 @@
   transform: translate(-50%, -50%);
   background-color: aliceblue;
   z-index: 100;
-  opacity: 1;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .top {
   background-color: darkblue;
+  opacity: 1;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
@@ -34,4 +35,8 @@
   font-size: 1.5rem;
   margin-top: 0;
   padding: 1rem;
+}
+
+p {
+  padding-left: 1rem;
 }

@@ -10,7 +10,7 @@ const AddUser = () => {
   const users = []
   const [userName, setUserName] = useState("");
   const [userAge, setUserAge] = useState("");
-  const [error, setError] = useState(false)
+  const [error, setError] = useState();
 
   const userInputHandler = (input, value) => {
     if (input === "Name") {
@@ -22,27 +22,53 @@ const AddUser = () => {
 
   const submitUserInputHandler = (event, data) => {
     event.preventDefault();
-    if (userName.trim().length !== 0 || userAge.trim().length !== 0) {
+    if (userName.trim().length === 0){
+      setError({
+        title: "Invalid input",
+        message: "Fields should not be empty, age must be > 16"
+      });
+    } else if (+userAge < 16) {
+      setError({
+        title: "Invalid age",
+        message: "you must been over 16 to register"
+      });
+    }else {
       users.push({"userName": userName, "userAge": userAge});
       console.log(users)
-    } else {
-      setError(true);
     };
+  };
+
+  const errorHandler = () => {
+    setError(null);
   }
+
   return(
     <div>
       {error && (
-        <ErrorMessage />
+        <ErrorMessage
+          title={error.title}
+          message={error.message}
+          onCloseBtnHandler={errorHandler}
+        />
         )}
       <Card className={style.input}>
         <form onSubmit={submitUserInputHandler}>
 
           <label htmlFor="Name">Name :</label>
-          <input type="text" onChange={(event) => {userInputHandler("Name", event.target.value)}}/>
-
+          <input
+            id="Name"
+            type="text"
+            value={userName}
+            onChange={(event) => {userInputHandler("Name", event.target.value)}}
+          />
 
           <label htmlFor="Age">Age :</label>
-          <input type="number" onChange={(event) => {userInputHandler("Age", event.target.value)}}/>
+          <input
+            id="Age"
+            type="number"
+            value={userAge}
+            onChange={(event) => {userInputHandler("Age", event.target.value)}}
+          />
 
           <Button type="submit">
             Add user

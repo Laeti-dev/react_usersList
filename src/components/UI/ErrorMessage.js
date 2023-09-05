@@ -4,15 +4,17 @@ import Button from "./Button";
 
 import style from "./ErrorMessage.module.css";
 
-const ErrorMessage = () => {
+const ErrorMessage = (props) => {
+
   return (
-    <div className={style.back}>
+    <div className={style.back} onClick={props.onCloseBtnHandler}>
       <div className={style["pop-up"]}>
         <div className={style.top}>
-          <h1>Inalid input</h1>
+          <h1>{props.title}</h1>
         </div>
         <div>
-          <Button>Close</Button>
+          <p>{props.message}</p>
+          <Button onClick={props.onCloseBtnHandler}>Close</Button>
         </div>
       </div>
 
