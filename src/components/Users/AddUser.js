@@ -33,8 +33,12 @@ const AddUser = () => {
         message: "you must been over 16 to register"
       });
     }else {
+      // send data to object in App
       users.push({"userName": userName, "userAge": userAge});
       console.log(users)
+      // reset form
+      setUserName("");
+      setUserAge("");
     };
   };
 
