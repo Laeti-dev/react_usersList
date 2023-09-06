@@ -6,8 +6,7 @@ import ErrorMessage from "../UI/ErrorMessage";
 
 import style from "./AddUser.module.css";
 
-const AddUser = () => {
-  const users = []
+const AddUser = (props) => {
   const [userName, setUserName] = useState("");
   const [userAge, setUserAge] = useState("");
   const [error, setError] = useState();
@@ -34,8 +33,7 @@ const AddUser = () => {
       });
     }else {
       // send data to object in App
-      users.push({"userName": userName, "userAge": userAge});
-      console.log(users)
+      props.onAddUser(userName, userAge)
       // reset form
       setUserName("");
       setUserAge("");
