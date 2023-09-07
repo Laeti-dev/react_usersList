@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 
 import Button from "../UI/Button";
 import Card from "../UI/Card";
@@ -8,36 +8,33 @@ import Wrapper from "../Helpers/Wrapper";
 import style from "./AddUser.module.css";
 
 const AddUser = (props) => {
-  const [userName, setUserName] = useState("");
-  const [userAge, setUserAge] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
   const [error, setError] = useState();
 
-  const userInputHandler = (input, value) => {
-    if (input === "Name") {
-      setUserName(value)
-    } else {
-      setUserAge(value)
-    }
-  };
+
 
   const submitUserInputHandler = (event, data) => {
     event.preventDefault();
-    if (userName.trim().length === 0){
+    const enteredName = nameInputRef.current.value;
+    const enteredAge = ageInputRef.current.value;
+    if (enteredName.trim().length === 0){
       setError({
         title: "Invalid input",
         message: "Fields should not be empty, age must be > 16"
       });
-    } else if (+userAge < 16) {
+    } else if (+enteredAge < 16) {
       setError({
         title: "Invalid age",
         message: "you must been over 16 to register"
       });
     }else {
       // send data to object in App
-      props.onAddUser(userName, userAge)
+      props.onAddUser(enteredName, enteredAge)
       // reset form
-      setUserName("");
-      setUserAge("");
+      nameInputRef.current.value = "";
+      ageInputRef.current.value = "";
     };
   };
 
@@ -61,16 +58,14 @@ const AddUser = (props) => {
           <input
             id="Name"
             type="text"
-            value={userName}
-            onChange={(event) => {userInputHandler("Name", event.target.value)}}
+            ref={nameInputRef}
           />
 
           <label htmlFor="Age">Age :</label>
           <input
             id="Age"
             type="number"
-            value={userAge}
-            onChange={(event) => {userInputHandler("Age", event.target.value)}}
+            ref={ageInputRef}
           />
 
           <Button type="submit">
@@ -79,7 +74,7 @@ const AddUser = (props) => {
 
         </form>
       </Card>
-    </Wrapper>
+    </Wrapper >
   )
 };
 

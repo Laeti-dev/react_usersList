@@ -5,11 +5,11 @@ import Button from "./Button";
 
 import style from "./ErrorMessage.module.css";
 
-const Backdrop = props => {
+const Backdrop = (props) => {
   return <div className={style.back} onClick={props.onCloseBtnHandler}/>;
 };
 
-const ModalOverlay = props => {
+const ModalOverlay = (props) => {
   return (
     <div className={style["pop-up"]}>
         <div className={style.top}>
@@ -24,13 +24,13 @@ const ModalOverlay = props => {
 };
 
 const ErrorMessage = (props) => {
-
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
         <Backdrop
-          onCloseBtnHandler={props.onCloseBtnHandler}/>,
-          document.getElementById("backdrop-root")
+          onCloseBtnHandler={props.onCloseBtnHandler}
+        />,
+        document.getElementById("backdrop-root")
         )}
         {ReactDOM.createPortal(
           <ModalOverlay
