@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import ErrorMessage from "../UI/ErrorMessage";
+import Wrapper from "../Helpers/Wrapper";
 
 import style from "./AddUser.module.css";
 
@@ -45,7 +46,7 @@ const AddUser = (props) => {
   }
 
   return(
-    <div>
+    <Wrapper>
       {error && (
         <ErrorMessage
           title={error.title}
@@ -78,7 +79,7 @@ const AddUser = (props) => {
 
         </form>
       </Card>
-    </div>
+    </Wrapper>
   )
 };
 
