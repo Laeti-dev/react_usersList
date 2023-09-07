@@ -29,7 +29,7 @@ const ErrorMessage = (props) => {
     <React.Fragment>
       {ReactDOM.createPortal(
         <Backdrop
-          onClick={props.onCloseBtnHandler}/>,
+          onCloseBtnHandler={props.onCloseBtnHandler}/>,
           document.getElementById("backdrop-root")
         )}
         {ReactDOM.createPortal(
